@@ -100,6 +100,34 @@ public class Report extends JFrame implements ActionListener{
         if(e.getSource() == generalButton){
             individualReport.setVisible(false);
             generalReport.setVisible(true);
+            int amount = 0;
+            int bs = 0;
+            try{
+                BufferedReader reader = new BufferedReader(new FileReader("inventario.txt"));
+                String Line;
+                while ((Line = reader.readLine()) != null){
+                    
+                String Format = Line;
+                String[] parts = Format.split("#");
+                
+                
+                
+                    
+                amount = amount + Integer.parseInt(parts[1]);
+                bs = (bs + Integer.parseInt(parts[2]))*Integer.parseInt(parts[1]);
+                quantity.setText(amount + " equipos");
+                money.setText(bs + " Bs.");
+                
+            
+                
+                }
+                reader.close();
+                } catch (IOException ex){
+                    ex.printStackTrace();
+                }
+
+
+
         }
         if(e.getSource() == continueButton){
             App ICentro = new App();
@@ -114,6 +142,8 @@ public class Report extends JFrame implements ActionListener{
         }
         if(e.getSource() == totalizeButton){
             String ci = ciField.getText().trim();
+            int amount = 0;
+            int bs = 0;
             if(ci.equals("")){
                 JOptionPane.showMessageDialog(null, "Ingrese una Cedula");
 
@@ -122,13 +152,23 @@ public class Report extends JFrame implements ActionListener{
                 BufferedReader reader = new BufferedReader(new FileReader("inventario.txt"));
                 String Line;
                 while ((Line = reader.readLine()) != null){
-
+                    
                 String Format = Line;
                 String[] parts = Format.split("#");
-                //this.amount = amount + Integer.parseInt(parts[1]);
-                //this.bs = bs + Float.parseFloat(parts[2]);
+                String[] lparts = parts[5].split(";");
+                int cint = Integer.parseInt(ci);
+                int intlparts = Integer.parseInt(lparts[0]);
                 
-            }
+                if(cint == intlparts){
+                    
+                amount = amount + Integer.parseInt(parts[1]);
+                bs = (bs + Integer.parseInt(parts[2]))*Integer.parseInt(parts[1]);
+                quantity.setText(amount + " equipos");
+                money.setText(bs + " Bs.");
+                
+            
+                }
+                }
                 reader.close();
                 } catch (IOException ex){
                     ex.printStackTrace();
