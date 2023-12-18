@@ -105,8 +105,8 @@ public class App extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(null, "Se deben llenar todos los campos con datos validos");
       } else {
       try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter("inventario.txt"));
-      writer.write("\n" + desc + "#" + ct + "#" + mu + "#" + date + "#" + nf + "#" + ci + ";");
+      BufferedWriter writer = new BufferedWriter(new FileWriter("inventario.txt", true));
+      writer.write(desc + "#" + ct + "#" + mu + "#" + date + "#" + nf + "#" + ci + ";" + "\n");
       writer.close();
       
       } catch (IOException e) {
