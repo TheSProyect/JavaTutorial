@@ -4,11 +4,12 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*; 
 import java.awt.*; 
+import javax.swing.table.*;
 
 public class Report extends JFrame implements ActionListener{
     private JLabel reportType, ciLabel, total, quantity, money;
     private JTextField ciField;
-    private JTextArea generalTable;
+    private JTable generalTable;
     private JScrollPane Scroller;
     private JButton continueButton, totalizeButton;
     private JRadioButton individualButton, generalButton;
@@ -54,7 +55,15 @@ public class Report extends JFrame implements ActionListener{
         totalizeButton.setBounds(410, 30, 100, 20);
         totalizeButton.addActionListener(this);
 
-        generalTable = new JTextArea();
+        DefaultTableModel model = new DefaultTableModel(); 
+        generalTable = new JTable(model);
+        model.addColumn("C.I. Responsable"); 
+        model.addColumn("Cantidad Equipos"); 
+        model.addColumn("Monto Total(Bs.)"); 
+
+
+
+
         Scroller = new JScrollPane(generalTable);
         Scroller.setBounds(30,10, 520, 120);
 
@@ -94,6 +103,8 @@ public class Report extends JFrame implements ActionListener{
         if(e.getSource() == individualButton){
             individualReport.setVisible(true);
             generalReport.setVisible(false);
+            quantity.setText("0 equipos");
+                money.setText("0 Bs.");
             
         }
         
